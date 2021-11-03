@@ -1,0 +1,55 @@
+import numpy as np
+from numpy.core.fromnumeric import argmax
+
+diem_random = np.random.randint(10,size=(10,30),dtype=np.int32)
+
+diemTB_HS = np.average(diem_random,axis=0)
+print("Diem trung binh cac hoc sinh lop 2A : ", diemTB_HS)
+
+print("====================================================")
+print("Diem TB cao nhat : ", diemTB_HS.max())
+print("Cua hoc sinh thu : ",np.argmax(diemTB_HS))
+print("Bang diem day du cua hoc sinh :",diem_random[:,np.argmax(diemTB_HS)])
+
+print("Diem TB thap nhat : ", diemTB_HS.min())
+print("Cua hoc sinh thu : ",np.argmin(diemTB_HS))
+print("Bang diem day du cua hoc sinh :",diem_random[:,np.argmin(diemTB_HS)])
+
+diemTB_Mon = np.average(diem_random,axis=1)
+print("Diem trung binh cua tung mon : ", diemTB_Mon)
+print("====================================================")
+print("Diem TB cao nhat cua mon hoc : ", diemTB_Mon.max())
+print("Tai mon hoc thu : ",np.argmax(diemTB_Mon))
+print("Bang diem day du cua mon hoc :",diem_random[:,argmax(diemTB_Mon)])
+
+print("Diem TB thap nhat cua mon hoc : ", diemTB_Mon.min())
+print("Tai mon hoc thu : ",np.argmin(diemTB_Mon))
+print("Bang diem day du cua mon hoc :",diem_random[:,np.argmin(diemTB_Mon)])
+
+print("====================================================")
+
+print('Do lech chuan cua hoc sinh:')
+d=np.array([diem_random[:,i].std()for i in range(0,30)])
+print(d)
+std=d.min()
+x=np.where(d==std)
+print(f'Hoc sinh hoc dong deu nhat {x[0]}')
+print(f'Bang diem cua hoc sinh dong deu nhat : {diem_random[:,int(x[0])]}')
+print("------------------------------")
+std=d.max()
+x=np.where(d==std)
+print(f'Hoc sinh hoc lech nhat {x[0]}')
+print(f'Bang diem cua hoc sinh lech nhat : {diem_random[:,int(x[0])]}')
+print("------------------------------")
+d=np.array([diem_random[i,:].std()for i in range(0,10)])
+print('Do lech chuan cua mon hoc')
+print(d)
+std=d.min()
+x=np.where(d==std)
+print(f'Mon hoc co diem dong deu nhat {x[0]}')
+print(f'Bang diem cua mon hoc dong deu nhat : {diem_random[int(x[0]),:]}')
+print("------------------------------")
+std=d.max()
+x=np.where(d==std)
+print(f'Mon hoc co diem lech nhat {x[0]}')
+print(f'Bang diem cua mon hoc co diem lech nhat : {diem_random[int(x[0]),:]}')
